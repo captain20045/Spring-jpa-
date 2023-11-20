@@ -24,15 +24,19 @@ public class Culture {
 
     @Column(name = "c_longitude")
     private String c_longitude;
+    
+    @Column(name = "culture_image") 
+    private String culture_image;
 
     public Culture() {
     }
 
-    public Culture(String culture_name, String culture_address, String c_latitude, String c_longitude) {
+    public Culture(String culture_name, String culture_address, String c_latitude, String c_longitude, String culture_image) {
         this.culture_name = culture_name;
         this.culture_address = culture_address;
         this.c_latitude = c_latitude;
         this.c_longitude = c_longitude;
+        this.culture_image = culture_image;
     }
 
     public String getCulture_seq() {
@@ -73,6 +77,14 @@ public class Culture {
 
     public void setC_longitude(String c_longitude) {
         this.c_longitude = c_longitude;
+    }
+    
+    public String getCulture_image() {
+        return culture_image;
+    }
+
+    public void setCulture_image(String culture_image) {
+        this.culture_image = culture_image;
     }
 
 }
