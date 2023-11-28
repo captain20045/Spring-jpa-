@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './Style.css';
+
 
 function UserUpdatePage({ userId }) {
     const navigate = useNavigate();
@@ -49,7 +51,7 @@ function UserUpdatePage({ userId }) {
     };
 
     return (
-        <div>
+        <div className="userUpdateFormContainer">
             <h2>회원 정보 수정</h2>
             <form onSubmit={handleSubmit}>
                 <div>
@@ -108,6 +110,7 @@ function UserUpdatePage({ userId }) {
                     />
                 </div>
                 <button type="submit">수정하기</button>
+                
             </form>
         </div>
     );

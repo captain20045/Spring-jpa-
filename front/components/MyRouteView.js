@@ -70,10 +70,18 @@ const MyRouteView = () => {
         return data.routes[0];
     };
 
+    
+
     return (
         <div>
-            <div ref={mapContainer} style={{ width: '100%', height: '600px' }} />
-            <div style={{ position: 'absolute', top: '10px', left: '10px', background: 'white', padding: '10px' }}>
+            <div ref={mapContainer} style={{ 
+            width: 'calc(100% - 100px)', // 전체 너비에서 좌우 여백(총 100px)을 뺀 너비
+            height: '800px', // 높이 설정
+            margin: '0 50px', // 상하 여백은 0, 좌우 여백은 각각 50px
+            position: 'relative',
+            borderRadius: '25px' // `Mapbox.js`에 적용된 테두리 반경 스타일도 적용하세요(선택 사항)
+        }} />
+            <div className="routeInfo">
                 {routeInfo.distance && <div>거리: {(routeInfo.distance / 1000).toFixed(2)} km</div>}
                 {routeInfo.duration && <div>예상 시간: {(routeInfo.duration / 60).toFixed(2)} 분</div>}
             </div>

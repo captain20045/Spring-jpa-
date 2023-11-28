@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'; // axios를 직접 사용합니다.
+import axios from 'axios'; 
+import './Style.css';
 
 function RegistrationForm() {
     const navigate = useNavigate();
@@ -51,8 +52,8 @@ function RegistrationForm() {
     };
 
     return (
-        <div>
-            <h2>회원가입</h2>
+        <div className="registrationFormContainer">
+            <h3>회원가입</h3>
             {message.error && <div className="alert alert-danger">{message.error}</div>}
             {message.success && <div className="alert alert-success">{message.success}</div>}
             <form onSubmit={handleSubmit}>

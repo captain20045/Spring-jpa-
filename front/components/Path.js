@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import axios from 'axios';
 import { useSearchParams, useNavigate } from 'react-router-dom';
+import './Style.css'; 
+
 
 const Path = () => {
     const [searchParams] = useSearchParams();
@@ -104,16 +106,28 @@ const Path = () => {
 
     return (
         <div>
-            <div ref={mapContainer} style={{ width: '100%', height: '600px' }} />
-            <div style={{ position: 'absolute', top: '10px', left: '10px', background: 'white', padding: '10px' }}>
+            <div ref={mapContainer} style={{ 
+            width: 'calc(100% - 100px)', // 전체 너비에서 좌우 여백(총 100px)을 뺀 너비
+            height: '800px', 
+            margin: '0 50px', 
+            position: 'relative',
+            borderRadius: '25px' 
+        }} />
+            <div className="routeInfo">
                 {routeInfo.distance && <div>거리: {(routeInfo.distance / 1000).toFixed(2)} km</div>}
                 {routeInfo.duration && <div>예상 시간: {(routeInfo.duration / 60).toFixed(2)} 분</div>}
             </div>
+
             {isLoggedIn && (
-                <button
-                    style={{ position: 'absolute', top: '10px', right: '10px' }}
-                    onClick={handleSaveRoute}
-                >
+                <button className="save-route-button"
+                style={{ 
+                    position: 'absolute', 
+                    top: '210px', 
+                    left: '61.5px',
+                    transform: 'translateY(-50%)'
+                }}
+                 
+                 onClick={handleSaveRoute}>
                     경로 저장
                 </button>
             )}
