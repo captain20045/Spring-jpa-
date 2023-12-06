@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import ScrollTrigger from '@terwanerik/scrolltrigger';
 import './Style.css';
 
-//배너이미지
+/* 이미지 임포트하는 코드들  */
 import bikeImage from './img/bike.jpg';
 import bikeImage1 from './img/bike1.jpg';
 import bikeImage2 from './img/bike2.jpg';
 
-//서울,지도 이미지
 import mapImage from './img/map.jpg';
 import seoulImage from './img/seoul.png'; 
 
-//구성요소,대여소,advantages이미지
 import feature1 from './img/feature1.jpg';
 import feature2 from './img/feature2.jpg';
 import feature3 from './img/feature3.jpg';
@@ -21,7 +20,7 @@ import feature5 from './img/feature5.jpg';
 import advantages1 from './img/advantages1.jpg';
 import advantages2 from './img/advantages2.jpg';
 import advantages3 from './img/advantages3.jpg';
-import advantages4 from './img/advantages4.jpg';
+
 
 
 
@@ -49,16 +48,52 @@ function MainPage() {
 
 
 
+      // 스크롤 이벤트 핸들러
+  const handleScroll = () => {
+    const bottom = Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight;
+    if (bottom) {
+      console.log('스크롤이 페이지 하단에 도달했습니다. 추가 데이터를 불러옵니다.');
+      // 여기에 데이터 불러오는 로직 추가
+    }
+  };
+
+  // 스크롤 이벤트 리스너 추가 및 제거
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []); // 의존성 배열이 비어있으므로 컴포넌트 마운트 및 언마운트 시에만 실행됩니다.
+
+  
+  useEffect(() => {
+    const trigger = new ScrollTrigger({
+        trigger: {
+            once: false,
+            offset: {
+                element: {
+                    x: 0,
+                    y: (trigger, rect, direction) => {
+                        return 0.2;
+                    }
+                },
+            }
+        }
+    });
+
+
+    trigger.add('[data-trigger]');
+
+}, []);
+
     return (
-        <div className='page-container'>
-            <div className='banner-container'>
+        <div className='page-container' >
+            <div className='banner-container' >
                 <button onClick={prevImage} className="banner-button left">&lt;</button>
                 <img src={bikeImages[currentImageIndex]} alt={`Bike ${currentImageIndex}`} className="banner-image" />
                 <button onClick={nextImage} className="banner-button right">&gt;</button>
             </div>
 
 
-            <div className="seoul-section">
+            <div className="seoul-section" >
                 <img src={seoulImage} alt="서울" className="seoul-image" />
                     <div className="map-section">
                         <img src={mapImage} alt="Map" className="map-image" />
@@ -69,7 +104,7 @@ function MainPage() {
                     </div>
             </div>
 
-            <section className="rental-info-section">
+            <section className="rental-info-section" data-trigger="your-trigger-value">
             <h2 className="rental-info-header">대여소 안내</h2>
             <div className="rental-info-container">
                 <div className="rental-info">
@@ -93,7 +128,7 @@ function MainPage() {
             </div>
             </section>
 
-            <section className="components-section">
+            <section className="components-section" data-trigger="your-trigger-value">
             <h2 className="components-section-header">대여소 구성요소</h2>
             <div className="components-container">
                 <div className="component-item">
@@ -111,8 +146,8 @@ function MainPage() {
             </div>
             </section>
 
-           <section className="advantages-section">
-                    
+           <section className="advantages-section" data-trigger="your-trigger-value">
+
                     <div className="advantages-info-container">
                         <div className="advantages-info">
                         <img src={advantages1} alt="" className="advantages-info-img" />
@@ -135,13 +170,7 @@ function MainPage() {
                             매일 마일리지 쌓고, 갈아탈 때마다 리워드도 받고, 마일리지로 결제하고, 쓸 때마다 절약되는 경제적인 앱 티머니GO입니다.
                             </div>
                         </div>
-                        {/* <div className="advantages-info">
-                        <img src={advantages4} alt="" className="advantages-info-img" />
-                            <div className="advantages-info-text">
-                            <strong className="advantages-info-subtitle">친환경</strong>
-                            해당 지역의 주민 또는 방문객에게 자전거를 빌려주는 공공 자전거 대여 제도를 말합니다. 유럽에서 처음 시작되었으며 현재는 전 세계적으로 시행되고 있습니다
-                            </div>
-                        </div> */}
+
                     </div>
             </section>
         </div>
